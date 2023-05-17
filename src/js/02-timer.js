@@ -52,17 +52,8 @@ flatpickr(dateField, options);
     
 //             }, 1000); 
 //     },
-
-//     stopTimer(){
-//         if(deltaTime <= 0){
-//             clearInterval(this.timerID);
-//             startBtn.disabled = false;
-//             dateField.disabled = false;
-//         }
-//     }
     
 // };
-
 
 // startBtn.addEventListener('click', timer.onStart);
 
@@ -84,17 +75,6 @@ function onStart(evt) {
         }, 1000); 
 };
 
-// function stopTimer(){
-//     if(deltaTime <= 0){
-//         clearInterval(timerID);
-//         startBtn.disabled = false;
-//         dateField.disabled = false;
-//         return;
-//     }
-// };
-
-// stopTimer();
-
 function updateTimer({ days, hours, minutes, seconds }) {
     if(deltaTime < 0){
         clearInterval(timerID);
@@ -102,7 +82,7 @@ function updateTimer({ days, hours, minutes, seconds }) {
         dateField.disabled = false;
         return;
     }
-    
+
     ref.days.textContent = `${days}`;
     ref.hours.textContent = `${hours}`;
     ref.minutes.textContent = `${minutes}`;

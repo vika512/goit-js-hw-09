@@ -15,8 +15,6 @@ const ref = {
 
 startBtn.disabled = true;
 
-let countDownTime = null;
-
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -46,7 +44,7 @@ flatpickr(dateField, options);
     
 //         this.timerID = setInterval(() => {
 //             const currentDate = Date.now();
-//             const deltaTime = countDownTime - currentDate;
+//             deltaTime = countDownTime - currentDate;
 //             const time = convertMs(deltaTime);
 //             updateTimer(time);
 
@@ -56,14 +54,15 @@ flatpickr(dateField, options);
 //     },
 
 //     stopTimer(){
-//         if(deltaTime >= 0){
+//         if(deltaTime <= 0){
 //             clearInterval(this.timerID);
 //             startBtn.disabled = false;
 //             dateField.disabled = false;
-//         };
+//         }
 //     }
     
 // };
+
 
 // startBtn.addEventListener('click', timer.onStart);
 
@@ -81,22 +80,29 @@ function onStart(evt) {
         deltaTime = countDownTime - currentDate;
         const time = convertMs(deltaTime);
         updateTimer(time);
-        console.log(time);
 
         }, 1000); 
 };
 
-function stopTimer(){
-    if(deltaTime >= 0){
+// function stopTimer(){
+//     if(deltaTime <= 0){
+//         clearInterval(timerID);
+//         startBtn.disabled = false;
+//         dateField.disabled = false;
+//         return;
+//     }
+// };
+
+// stopTimer();
+
+function updateTimer({ days, hours, minutes, seconds }) {
+    if(deltaTime < 0){
         clearInterval(timerID);
         startBtn.disabled = false;
         dateField.disabled = false;
+        return;
     }
-};
-
-stopTimer();
-
-function updateTimer({ days, hours, minutes, seconds }) {
+    
     ref.days.textContent = `${days}`;
     ref.hours.textContent = `${hours}`;
     ref.minutes.textContent = `${minutes}`;

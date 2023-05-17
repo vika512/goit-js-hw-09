@@ -16,3 +16,11 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer {
+  display: flex;
+  margin-top: 10px;
+  column-gap: 5px;
+}
+
+

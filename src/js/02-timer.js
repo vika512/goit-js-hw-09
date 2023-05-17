@@ -1,5 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 
 const dateField = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
@@ -24,7 +26,7 @@ const options = {
         const startDate = new Date();
         if(selectedDates[0] - startDate < 0){
             startBtn.disabled = true;
-            alert('Select the date in the FUTURE');
+            Notify.failure('Select the date in the FUTURE');
         }
 
         else {
@@ -36,34 +38,32 @@ const options = {
 
 flatpickr(dateField, options);
 
-// startBtn.addEventListener('click', onStart);
-
 const timer = {
-    isActive: true,
     onStart(evt) {
-        if(this.isActive){
-            return
-        }; 
-
-        this.isActive = false;
         startBtn.disabled = true;
+        dateField.disabled = true;
     
         const timerID = setInterval(() => {
             const currentDate = Date.now();
             const deltaTime = countDownTime - currentDate;
             const time = convertMs(deltaTime);
             updateTimer(time);
+
             console.log(time);
     
             }, 1000); 
     },
+
+    
 };
 
 startBtn.addEventListener('click', timer.onStart);
 
+// startBtn.addEventListener('click', onStart);
 
 // function onStart(evt) {
 //     startBtn.disabled = true;
+//     dateField.disabled = true;
 
 //     const timerID = setInterval(() => {
 //         const currentDate = Date.now();

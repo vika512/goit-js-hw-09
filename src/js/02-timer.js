@@ -42,10 +42,11 @@ const timer = {
     onStart(evt) {
         startBtn.disabled = true;
         dateField.disabled = true;
+        let deltaTime = null;
     
         const timerID = setInterval(() => {
             const currentDate = Date.now();
-            const deltaTime = countDownTime - currentDate;
+            deltaTime = countDownTime - currentDate;
             const time = convertMs(deltaTime);
             updateTimer(time);
 
@@ -54,6 +55,13 @@ const timer = {
             }, 1000); 
     },
 
+    stopTimer(){
+        if(countDownTime >= 0){
+            clearInterval(this.timerID);
+            startBtn.disabled = false;
+            dateField.disabled = false;
+        };
+    }
     
 };
 
@@ -75,13 +83,13 @@ startBtn.addEventListener('click', timer.onStart);
 //         }, 1000); 
 // };
 
-function stopTimer(){
-    if(deltaTime = 0){
-        clearInterval(timerID);
-    }
-};
+// function stopTimer(){
+//     if(deltaTime = 0){
+//         clearInterval(timerID);
+//     }
+// };
 
-stopTimer();
+// stopTimer();
 
 function updateTimer({ days, hours, minutes, seconds }) {
     ref.days.textContent = `${days}`;

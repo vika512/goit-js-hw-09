@@ -38,58 +38,63 @@ const options = {
 
 flatpickr(dateField, options);
 
-const timer = {
-    onStart(evt) {
-        startBtn.disabled = true;
-        dateField.disabled = true;
-        let deltaTime = null;
+// const timer = {
+//     timerID: null,
+//     onStart(evt) {
+//         startBtn.disabled = true;
+//         dateField.disabled = true;
     
-        const timerID = setInterval(() => {
-            const currentDate = Date.now();
-            deltaTime = countDownTime - currentDate;
-            const time = convertMs(deltaTime);
-            updateTimer(time);
+//         this.timerID = setInterval(() => {
+//             const currentDate = Date.now();
+//             const deltaTime = countDownTime - currentDate;
+//             const time = convertMs(deltaTime);
+//             updateTimer(time);
 
-            console.log(time);
+//             console.log(time);
     
-            }, 1000); 
-    },
+//             }, 1000); 
+//     },
 
-    stopTimer(){
-        if(countDownTime >= 0){
-            clearInterval(this.timerID);
-            startBtn.disabled = false;
-            dateField.disabled = false;
-        };
-    }
+//     stopTimer(){
+//         if(deltaTime >= 0){
+//             clearInterval(this.timerID);
+//             startBtn.disabled = false;
+//             dateField.disabled = false;
+//         };
+//     }
     
+// };
+
+// startBtn.addEventListener('click', timer.onStart);
+
+startBtn.addEventListener('click', onStart);
+
+let deltaTime = null;
+let timerID;
+
+function onStart(evt) {
+    startBtn.disabled = true;
+    dateField.disabled = true;
+
+    timerID = setInterval(() => {
+        const currentDate = Date.now();
+        deltaTime = countDownTime - currentDate;
+        const time = convertMs(deltaTime);
+        updateTimer(time);
+        console.log(time);
+
+        }, 1000); 
 };
 
-startBtn.addEventListener('click', timer.onStart);
+function stopTimer(){
+    if(deltaTime >= 0){
+        clearInterval(timerID);
+        startBtn.disabled = false;
+        dateField.disabled = false;
+    }
+};
 
-// startBtn.addEventListener('click', onStart);
-
-// function onStart(evt) {
-//     startBtn.disabled = true;
-//     dateField.disabled = true;
-
-//     const timerID = setInterval(() => {
-//         const currentDate = Date.now();
-//         const deltaTime = countDownTime - currentDate;
-//         const time = convertMs(deltaTime);
-//         updateTimer(time);
-//         console.log(time);
-
-//         }, 1000); 
-// };
-
-// function stopTimer(){
-//     if(deltaTime = 0){
-//         clearInterval(timerID);
-//     }
-// };
-
-// stopTimer();
+stopTimer();
 
 function updateTimer({ days, hours, minutes, seconds }) {
     ref.days.textContent = `${days}`;
@@ -98,7 +103,8 @@ function updateTimer({ days, hours, minutes, seconds }) {
     ref.seconds.textContent = `${seconds}`;
 }
 
-//////////////////////////////////
+///////// Counting functions ///////
+
 
 function addLeadingZero(value){
     return String(value).padStart(2, '0');

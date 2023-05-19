@@ -13,6 +13,10 @@ const ref = {
     seconds: document.querySelector('[data-seconds]'),
 }
 
+let countDownTime = null;
+let deltaTime = null;
+let timerID;
+
 startBtn.disabled = true;
 
 const options = {
@@ -36,31 +40,7 @@ const options = {
 
 flatpickr(dateField, options);
 
-// const timer = {
-//     timerID: null,
-//     onStart(evt) {
-//         startBtn.disabled = true;
-//         dateField.disabled = true;
-    
-//         this.timerID = setInterval(() => {
-//             const currentDate = Date.now();
-//             deltaTime = countDownTime - currentDate;
-//             const time = convertMs(deltaTime);
-//             updateTimer(time);
-
-//             console.log(time);
-    
-//             }, 1000); 
-//     },
-    
-// };
-
-// startBtn.addEventListener('click', timer.onStart);
-
 startBtn.addEventListener('click', onStart);
-
-let deltaTime = null;
-let timerID;
 
 function onStart(evt) {
     startBtn.disabled = true;
@@ -88,6 +68,28 @@ function updateTimer({ days, hours, minutes, seconds }) {
     ref.minutes.textContent = `${minutes}`;
     ref.seconds.textContent = `${seconds}`;
 }
+
+// const timer = {
+//     timerID: null,
+//     onStart(evt) {
+//         startBtn.disabled = true;
+//         dateField.disabled = true;
+    
+//         this.timerID = setInterval(() => {
+//             const currentDate = Date.now();
+//             deltaTime = countDownTime - currentDate;
+//             const time = convertMs(deltaTime);
+//             updateTimer(time);
+
+//             console.log(time);
+    
+//             }, 1000); 
+//     },
+    
+// };
+
+// startBtn.addEventListener('click', timer.onStart);
+
 
 ///////// Counting functions ///////
 

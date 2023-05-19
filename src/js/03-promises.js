@@ -1,9 +1,5 @@
 import { Notify } from 'notiflix';
 
-// Notify.success(`Fulfilled promise ${position}` in ${delay}ms);
-
-// Notify.failure(`Rejected promise ${position}` in ${delay}ms);
-
 const refs = {
   button: document.querySelector('button'),
   form: document.querySelector('form'),
@@ -37,14 +33,17 @@ function onSubmit(evt) {
   // console.log(delay, step, amount)
 
 
-  if (delay < 0 || step < 0 || amount < 0) {
+  if(delay < 0 || step < 0 || amount < 0) {
     Notify.warning(
       `Enter number more than 0`
     );
-  } else if (Number(amount) === 0) {
+  } 
+  
+  else if(Number(amount) === 0) {
     Notify.warning(`Enter number more than 0`);
-  } else {
-
+  } 
+  
+  else{
     for (let i = 0; i < amount; i++) {
       createPromise(i, delay + step * i)
         .then(({ position, delay }) => {
@@ -54,9 +53,9 @@ function onSubmit(evt) {
           Notify.failure(`❌ Rejected promise ${position + 1} in ${delay}ms`);
         });
     }
-  }
+  };
 
-}
+};
 
 
 
